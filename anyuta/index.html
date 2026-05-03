@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Анна Мирзоян — Графический дизайнер</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--p:#6b5082;--cream:#f5f3ed;--lt:#5a3d70}
+html,body{width:100%;height:100%;overflow:hidden;cursor:none;font-family:'Montserrat',sans-serif;background:var(--p);transition:background .4s}
+
+/* CURSOR */
+#cur{position:fixed;top:0;left:0;width:28px;height:36px;pointer-events:none;z-index:99999;transition:transform .15s}
+body.light #cur path{stroke:#333}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;justify-content:center;gap:36px;padding:20px 0}
+nav button{font-family:'Montserrat',sans-serif;font-size:16px;background:transparent;border:none;color:var(--cream);cursor:none;padding:6px 18px;border-radius:20px;transition:all .25s}
+nav button.active{background:var(--cream);color:var(--p)}
+nav button:hover:not(.active){opacity:.75;transform:translateY(-2px)}
+body.light nav button{color:var(--lt)}
+body.light nav button.active{background:var(--lt);color:#fff}
+
+/* TABS */
+.tab{display:none;position:fixed;inset:0;overflow:hidden}
+.tab.active{display:block}
+.tab.anim{animation:fadeUp .45s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+
+/* ══ HOME ══ */
+#home{background:linear-gradient(140deg,#593870 0%,#7b5898 55%,#6a4f82 100%)}
+#home::before{content:'';position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 52% 88% at 16% 62%,rgba(35,18,55,.72) 0%,transparent 62%)}
+
+.hero-photo{position:absolute;left:0;bottom:0;height:90vh;width:auto;object-fit:contain;object-position:left bottom;z-index:1;animation:slideL .9s cubic-bezier(.22,1,.36,1) both .1s}
+@keyframes slideL{from{opacity:0;transform:translateX(-50px)}to{opacity:1;transform:translateX(0)}}
+
+.hero-text{position:absolute;top:10%;left:0;right:0;text-align:center;z-index:2;pointer-events:none;animation:fadeDown .8s ease both .15s}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-22px)}to{opacity:1;transform:translateY(0)}}
+.hero-text h1{font-family:'Playfair Display',serif;font-size:min(14vw,190px);color:var(--cream);line-height:1;letter-spacing:4px;text-shadow:0 0 80px rgba(180,140,220,.35)}
+.hero-text p{font-size:min(2.6vw,36px);color:var(--cream);letter-spacing:8px;margin-top:8px}
+
+.hero-btn{position:absolute;right:9%;bottom:32%;z-index:3;background:var(--cream);color:var(--p);font-family:'Montserrat',sans-serif;font-size:min(2vw,30px);font-weight:500;padding:14px 48px;border-radius:18px;border:none;cursor:none;box-shadow:0 8px 28px rgba(0,0,0,.18);animation:popIn .65s cubic-bezier(.34,1.56,.64,1) both .55s;transition:transform .3s,box-shadow .3s}
+@keyframes popIn{from{opacity:0;transform:scale(.65)}to{opacity:1;transform:scale(1)}}
+.hero-btn:hover{transform:scale(1.07);box-shadow:0 0 30px rgba(180,130,230,.55),0 14px 36px rgba(0,0,0,.22)}
+
+/* ══ ABOUT ══ */
+#about{background:#fff}
+.about-scroll{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;display:flex;flex-direction:column;align-items:center;padding:90px 5% 60px}
+.about-heading{font-family:'Playfair Display',serif;font-size:min(9vw,96px);color:var(--lt);text-align:center;width:100%;margin-bottom:40px;animation:fadeDown .6s ease both}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;width:100%;max-width:860px}
+.card{background:var(--p);color:#fff;border-radius:22px;padding:32px;font-size:16px;line-height:1.65;box-shadow:0 12px 32px rgba(0,0,0,.13);animation:cardPop .5s ease both;transition:transform .3s,box-shadow .3s}
+.card:nth-child(2){animation-delay:.15s}
+.card:hover{transform:translateY(-6px);box-shadow:0 0 28px rgba(160,100,220,.4),0 18px 40px rgba(0,0,0,.18)}
+@keyframes cardPop{from{opacity:0;transform:scale(.9) translateY(12px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.card p+p{margin-top:16px}
+.sw-row{display:flex;gap:10px;margin-bottom:24px;flex-wrap:wrap}
+.sw{width:48px;height:48px;background:#fff;color:var(--p);border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:17px;transition:.25s;cursor:none;flex-shrink:0}
+.sw:hover{transform:translateY(-8px);box-shadow:0 0 16px rgba(255,255,255,.6)}
+.sk-list{list-style:none}
+.sk-list li{padding:9px 0 9px 22px;position:relative;font-size:16px}
+.sk-list li::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:8px;height:8px;background:#fff;border-radius:50%}
+
+/* ══ PROJECTS ══ */
+#projects{background:var(--p)}
+.proj-scroll{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;padding:80px 3% 40px}
+.proj-grid-top{display:grid;grid-template-columns:1fr 1.5fr;gap:16px;max-width:1060px;margin:0 auto 16px}
+.proj-grid-bot{display:grid;grid-template-columns:2fr 1fr;gap:16px;max-width:1060px;margin:0 auto}
+.pc{background:var(--cream);border-radius:22px;padding:20px;color:var(--lt);display:flex;flex-direction:column;overflow:hidden;transition:transform .35s,box-shadow .35s;animation:cardPop .5s ease both}
+.pc:nth-child(2){animation-delay:.1s}.pc:nth-child(3){animation-delay:.2s}.pc:nth-child(4){animation-delay:.3s}
+.pc:hover{transform:translateY(-8px) scale(1.01);box-shadow:0 0 36px rgba(200,150,255,.45),0 20px 44px rgba(0,0,0,.28)}
+.pc h3{font-family:'Playfair Display',serif;font-size:clamp(16px,1.8vw,26px);text-align:center;margin-bottom:12px;flex-shrink:0}
+.imgs{display:flex;gap:8px;justify-content:center;align-items:center;flex:1;min-height:0}
+.imgs img{border-radius:10px;object-fit:contain;max-width:100%;max-height:100%;transition:transform .3s,box-shadow .3s;cursor:pointer}
+.imgs img:hover{transform:scale(1.07);box-shadow:0 0 18px rgba(160,100,220,.5)}
+.id-wrap{display:flex;gap:10px;flex:1;min-height:0;overflow:hidden}
+.id-main{border-radius:10px;object-fit:cover;width:42%;height:100%;transition:transform .3s,box-shadow .3s;cursor:pointer}
+.id-main:hover{transform:scale(1.04);box-shadow:0 0 20px rgba(160,100,220,.5)}
+.id-sm-grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:5px;width:58%;overflow:hidden}
+.id-sm-grid div{display:flex;flex-direction:column;gap:2px;overflow:hidden}
+.id-sm-grid span{font-size:10px;text-align:center;font-weight:600;color:var(--lt);flex-shrink:0}
+.id-sm-grid img{width:100%;border-radius:7px;object-fit:cover;flex:1;min-height:0;transition:transform .3s,box-shadow .3s;cursor:pointer}
+.id-sm-grid img:hover{transform:scale(1.07);box-shadow:0 0 14px rgba(160,100,220,.5)}
+
+/* ══ CONTACTS ══ */
+#contacts{background:var(--cream)}
+.cont-wrap{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 30px 40px;color:var(--lt);overflow-y:auto}
+.cont-wrap h2{font-family:'Montserrat',sans-serif;font-size:clamp(24px,3.2vw,52px);font-weight:600;line-height:1.3;margin-bottom:48px;color:var(--lt);text-align:center;width:100%;animation:fadeDown .7s ease both}
+.launch{display:inline-block;text-decoration:none;background:linear-gradient(100deg,#6b4f80,#a07cc8);color:#fff;font-family:'Montserrat',sans-serif;font-size:clamp(26px,3.8vw,62px);font-weight:600;padding:20px 60px;border-radius:60px;cursor:none;box-shadow:0 10px 30px rgba(0,0,0,.18);animation:popIn .7s cubic-bezier(.34,1.56,.64,1) both .2s;transition:transform .3s,box-shadow .3s;margin-bottom:40px}
+.launch:hover{transform:scale(1.06);box-shadow:0 0 50px rgba(160,100,240,.6),0 18px 44px rgba(0,0,0,.25)}
+.tg{font-size:clamp(18px,2.2vw,36px);color:var(--lt);text-decoration:none;display:inline-block;transition:transform .3s,color .3s;cursor:none;animation:fadeUp .6s ease both .35s}
+.tg:hover{transform:scale(1.1);color:var(--p);text-shadow:0 0 20px rgba(160,100,220,.5)}
+.cont-sub{font-size:clamp(13px,1.1vw,18px);opacity:.6;margin-top:18px;animation:fadeUp .6s ease both .45s;color:var(--lt)}
+
+/* ══ LIGHTBOX ══ */
+#lightbox{position:fixed;inset:0;z-index:9998;background:rgba(0,0,0,.88);display:none;align-items:center;justify-content:center;backdrop-filter:blur(6px)}
+#lightbox.open{display:flex;animation:fadeUp .25s ease both}
+#lightbox img{max-width:90vw;max-height:90vh;border-radius:12px;box-shadow:0 0 60px rgba(180,120,255,.5);transform-origin:center;transition:transform .15s ease;cursor:none}
+#lb-hint{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.55);font-size:14px;pointer-events:none;z-index:9999;letter-spacing:.5px;white-space:nowrap}
+
+/* ══════════════════════════════════════════
+   TABLET ≤ 900px
+══════════════════════════════════════════ */
+@media(max-width:900px){
+  nav{gap:18px;padding:14px 12px;flex-wrap:wrap}
+  nav button{font-size:14px;padding:5px 14px}
+  .hero-text h1{font-size:min(18vw,120px)}
+  .hero-text p{font-size:min(3.5vw,22px);letter-spacing:4px}
+  .hero-btn{font-size:min(3vw,20px);padding:12px 32px;right:6%;bottom:20%}
+  .hero-photo{height:70vh}
+  .about-heading{font-size:min(12vw,72px)}
+  .about-grid{grid-template-columns:1fr;max-width:520px}
+  .proj-grid-top{grid-template-columns:1fr}
+  .proj-grid-bot{grid-template-columns:1fr}
+  .cont-wrap h2{font-size:clamp(22px,4.5vw,40px)}
+  .launch{font-size:clamp(22px,5vw,44px);padding:16px 40px}
+}
+
+/* ══════════════════════════════════════════
+   MOBILE ≤ 600px
+══════════════════════════════════════════ */
+@media(max-width:600px){
+  /* Cursor off on touch */
+  #cur{display:none}
+  html,body{cursor:auto}
+
+  /* Nav */
+  nav{gap:4px;padding:10px 6px;flex-wrap:wrap;background:rgba(0,0,0,.15)}
+  nav button{font-size:12px;padding:4px 10px;border-radius:14px}
+
+  /* HOME — photo stays bottom-left, text above it */
+  #home{overflow:hidden}
+  .hero-photo{
+    height:75vh;
+    width:auto;
+    position:absolute;
+    left:0;
+    bottom:0;
+    z-index:1}
+  .hero-text{
+    position:absolute;
+    top:12%;
+    left:0;right:0;
+    z-index:2;
+    text-align:center;
+    pointer-events:none}
+  .hero-text h1{font-size:13vw;letter-spacing:0px}
+  .hero-text p{font-size:4vw;letter-spacing:2px;margin-top:4px}
+  .hero-btn{
+    font-size:4.5vw;
+    padding:12px 28px;
+    right:5%;
+    bottom:12%;
+    z-index:3}
+
+  /* ABOUT — single column, no overflow */
+  .about-scroll{padding:70px 12px 40px}
+  .about-heading{font-size:min(13vw,52px);margin-bottom:20px}
+  .about-grid{
+    grid-template-columns:1fr;
+    gap:14px;
+    width:100%;
+    max-width:100%}
+  .card{padding:20px;font-size:14px;border-radius:16px}
+  .card p+p{margin-top:12px}
+  .sw{width:40px;height:40px;font-size:14px}
+  .sk-list li{font-size:14px;padding:7px 0 7px 20px}
+
+  /* PROJECTS */
+  .proj-scroll{padding:65px 8px 30px}
+  .proj-grid-top,.proj-grid-bot{
+    grid-template-columns:1fr;
+    margin-bottom:10px}
+  .pc{padding:14px;border-radius:16px;min-height:200px}
+  .pc h3{font-size:5vw;margin-bottom:10px}
+  .id-wrap{flex-direction:column;gap:8px}
+  .id-main{width:100%;height:160px;object-fit:cover;flex:none}
+  .id-sm-grid{width:100%;height:auto}
+  .id-sm-grid img{height:70px}
+  .imgs img{max-height:130px}
+
+  /* CONTACTS */
+  .cont-wrap{padding:70px 16px 40px;justify-content:center}
+  .cont-wrap h2{font-size:6vw;margin-bottom:28px}
+  .launch{font-size:6.5vw;padding:14px 24px;border-radius:36px;margin-bottom:24px}
+  .tg{font-size:5vw}
+  .cont-sub{font-size:3.5vw}
+
+  /* LIGHTBOX */
+  #lb-hint{font-size:11px;bottom:12px;text-align:center;width:90%}
+}
+</style>
+</head>
+<body>
+
+<svg id="cur" viewBox="0 0 30 38" fill="none">
+  <defs>
+    <linearGradient id="cg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff"/>
+      <stop offset="55%" stop-color="#c8c8c8"/>
+      <stop offset="100%" stop-color="#606060"/>
+    </linearGradient>
+    <filter id="cs"><feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#0006"/></filter>
+  </defs>
+  <path d="M2 2 L22 33 L16 17 L32 11 Z" fill="url(#cg)" stroke="#fff" stroke-width="1.1" stroke-linejoin="round" filter="url(#cs)"/>
+</svg>
+
+<nav>
+  <button class="active" data-tab="home">Главная</button>
+  <button data-tab="about">Обо мне</button>
+  <button data-tab="projects">Проекты</button>
+  <button data-tab="contacts">Контакты</button>
+</nav>
+
+<!-- HOME -->
+<section id="home" class="tab active">
+  <img src="images/Gemini_Generated_Image_dy2havdy2havdy2h_no_bg_preview_carve_photos.png"
+       class="hero-photo" alt="Анна" onerror="this.style.display='none'">
+  <div class="hero-text">
+    <h1>PORTFOLIO</h1>
+    <p>графический&nbsp;&nbsp;дизайнер</p>
+  </div>
+  <button class="hero-btn">Мирзоян Анна</button>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="tab">
+  <div class="about-scroll">
+    <h2 class="about-heading">ABOUT ME</h2>
+    <div class="about-grid">
+      <div class="card">
+        <p>Привет! Меня зовут Аня.<br>Я — начинающий графический дизайнер.</p>
+        <p>У меня два образования по специальности: среднее профессиональное (с отличием) и неоконченное высшее (учусь на втором курсе)</p>
+        <p>Я работаю с фирменным стилем, брендингом и айдентикой. Так же занимаюсь инфографикой, разработкой печатной продукции и разработкой визуальных материалов для маркетплейсов.</p>
+      </div>
+      <div class="card">
+        <div class="sw-row">
+          <div class="sw">Ps</div><div class="sw">Ai</div>
+          <div class="sw">Id</div><div class="sw" style="font-size:13px">Fig</div>
+        </div>
+        <ul class="sk-list">
+          <li>Насмотренность</li>
+          <li>Умение работать с нейросетями</li>
+          <li>Внимание к деталям</li>
+          <li>Креативность</li>
+          <li>Организованность</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="tab">
+  <div class="proj-scroll">
+    <div class="proj-grid-top">
+      <div class="pc">
+        <h3>Инфографика</h3>
+        <div class="imgs">
+          <img src="images/Frame 1 1.png" alt="inf1" class="lb-img">
+          <img src="images/Frame 2 1.png" alt="inf2" class="lb-img">
+        </div>
+      </div>
+      <div class="pc">
+        <h3>Фирменный&nbsp;стиль</h3>
+        <div class="id-wrap">
+          <img src="images/image 16.png" class="id-main lb-img" alt="brand-main">
+          <div class="id-sm-grid">
+            <div><span>Logo</span><img src="images/image 10.png" alt="logo" class="lb-img"></div>
+            <div><span>Security field</span><img src="images/image 12.png" alt="sec" class="lb-img"></div>
+            <div><span>Twists/dies</span><img src="images/image 11.png" alt="tw" class="lb-img"></div>
+            <div><span>Corporate colors</span><img src="images/image 13.png" alt="col" class="lb-img"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="proj-grid-bot">
+      <div class="pc">
+        <h3>Верстка</h3>
+        <div class="imgs" style="flex-direction:row;gap:10px">
+          <img src="images/image 14.png" alt="lay1" class="lb-img" style="flex:1;min-width:0;max-height:160px;object-fit:cover;border-radius:10px">
+          <img src="images/image 15.png" alt="lay2" class="lb-img" style="flex:1;min-width:0;max-height:160px;object-fit:cover;border-radius:10px">
+          <img src="images/image 17.png" alt="lay3" class="lb-img" style="flex:1;min-width:0;max-height:160px;object-fit:cover;border-radius:10px">
+        </div>
+      </div>
+      <div class="pc">
+        <h3>Разработка<br>упаковки</h3>
+        <div class="imgs">
+          <img src="images/image 18.png" alt="pack" class="lb-img">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTS -->
+<section id="contacts" class="tab">
+  <div class="cont-wrap">
+    <h2>Вы долистали до конца,<br>это знак.<br>Пора писать!</h2>
+    <a href="https://t.me/Gray_witch" target="_blank" class="launch">Запустить проект</a>
+    <a href="https://t.me/Gray_witch" target="_blank" class="tg">ТГ: @Gray_witch</a>
+    <p class="cont-sub">Ваше входящее сообщение — мой любимый вид уведомлений</p>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div id="lightbox">
+  <img id="lb-img" src="" alt="">
+  <div id="lb-hint">Нажмите чтобы закрыть &nbsp;|&nbsp; Колесо мыши — приближение</div>
+</div>
+
+<script>
+// Cursor
+const cur = document.getElementById('cur');
+document.addEventListener('mousemove', e => {
+  cur.style.left = e.clientX + 'px';
+  cur.style.top  = e.clientY + 'px';
+});
+document.querySelectorAll('a,button').forEach(el => {
+  el.addEventListener('mouseenter', () => cur.style.transform = 'scale(1.6)');
+  el.addEventListener('mouseleave', () => cur.style.transform = 'scale(1)');
+});
+
+// Tabs
+const navBtns = document.querySelectorAll('nav button');
+const tabs = document.querySelectorAll('.tab');
+function go(id) {
+  tabs.forEach(t => { t.classList.remove('active','anim'); });
+  navBtns.forEach(b => b.classList.remove('active'));
+  const sec = document.getElementById(id);
+  const btn = document.querySelector(`[data-tab="${id}"]`);
+  sec.classList.add('active');
+  void sec.offsetWidth;
+  sec.classList.add('anim');
+  btn.classList.add('active');
+  const light = id === 'about' || id === 'contacts';
+  document.body.classList.toggle('light', light);
+  document.body.style.background = light ? (id === 'about' ? '#fff' : '#f5f3ed') : '#6b5082';
+}
+navBtns.forEach(b => b.addEventListener('click', () => go(b.dataset.tab)));
+
+// Lightbox
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lb-img');
+let lbScale = 1;
+function openLb(src) { lbImg.src = src; lbScale = 1; lbImg.style.transform = 'scale(1)'; lb.classList.add('open'); }
+function closeLb() { lb.classList.remove('open'); lbImg.src = ''; }
+document.addEventListener('click', e => {
+  const t = e.target;
+  if (t.classList.contains('lb-img')) { openLb(t.src); return; }
+  if (lb.classList.contains('open')) { closeLb(); }
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
+lb.addEventListener('wheel', e => {
+  e.preventDefault();
+  lbScale += e.deltaY < 0 ? 0.15 : -0.15;
+  lbScale = Math.max(0.5, Math.min(5, lbScale));
+  lbImg.style.transform = `scale(${lbScale})`;
+}, { passive: false });
+</script>
+</body>
+</html>
