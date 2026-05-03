@@ -57,7 +57,6 @@ body.light nav button.active{background:var(--lt);color:#fff}
 .card p+p{margin-top:16px}
 .sw-row{display:flex;gap:14px;margin-bottom:24px;flex-wrap:wrap}
 
-/* Убрали фон, увеличили размер контейнера для иконок */
 .sw{width:60px;height:60px;background:transparent;display:flex;align-items:center;justify-content:center;transition:.25s;cursor:none;flex-shrink:0}
 .sw:hover{transform:translateY(-8px) scale(1.05); filter:drop-shadow(0 10px 14px rgba(0,0,0,.15))}
 
@@ -67,7 +66,6 @@ body.light nav button.active{background:var(--lt);color:#fff}
 
 /* ══ PROJECTS ══ */
 #projects{background:var(--p)}
-/* Project grids — fixed height so cards don't stretch */
 .proj-scroll{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;padding:74px 3% 20px}
 .proj-grid-top{display:grid;grid-template-columns:1fr 1.5fr;gap:14px;max-width:1060px;margin:0 auto 14px;height:calc(50vh - 60px)}
 .proj-grid-bot{display:grid;grid-template-columns:2fr 1fr;gap:14px;max-width:1060px;margin:0 auto;height:calc(50vh - 60px)}
@@ -102,7 +100,6 @@ body.light nav button.active{background:var(--lt);color:#fff}
 #lightbox.open{display:flex;animation:fadeUp .25s ease both}
 #lightbox img{max-width:90vw;max-height:90vh;border-radius:12px;box-shadow:0 0 60px rgba(180,120,255,.5);transform-origin:center;transition:transform .15s ease;cursor:none}
 #lb-hint{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.55);font-size:14px;pointer-events:none;z-index:9999;letter-spacing:.5px;white-space:nowrap}
-/* Hide hint on touch devices */
 @media(hover:none){#lb-hint{display:none}}
 
 /* ══════════════════════════════════════════
@@ -117,8 +114,11 @@ body.light nav button.active{background:var(--lt);color:#fff}
   .hero-photo{height:70vh}
   .about-heading{font-size:min(12vw,72px)}
   .about-grid{grid-template-columns:1fr;max-width:520px}
-  .proj-grid-top{grid-template-columns:1fr}
-  .proj-grid-bot{grid-template-columns:1fr}
+  
+  /* Отключена фиксированная высота для планшетов */
+  .proj-grid-top{grid-template-columns:1fr; height:auto; margin-bottom:14px;}
+  .proj-grid-bot{grid-template-columns:1fr; height:auto;}
+  
   .cont-wrap h2{font-size:clamp(22px,4.5vw,40px)}
   .launch{font-size:clamp(22px,5vw,44px);padding:16px 40px}
 }
@@ -127,61 +127,38 @@ body.light nav button.active{background:var(--lt);color:#fff}
    MOBILE ≤ 600px
 ══════════════════════════════════════════ */
 @media(max-width:600px){
-  /* Cursor off on touch */
   #cur{display:none}
   html,body{cursor:auto}
 
-  /* Nav */
   nav{gap:4px;padding:10px 6px;flex-wrap:wrap;background:rgba(0,0,0,.15)}
   nav button{font-size:12px;padding:4px 10px;border-radius:14px}
 
-  /* HOME — photo stays bottom-left, text above it */
   #home{overflow:hidden}
-  .hero-photo{
-    height:75vh;
-    width:auto;
-    position:absolute;
-    left:0;
-    bottom:0;
-    z-index:1}
-  .hero-text{
-    position:absolute;
-    top:12%;
-    left:0;right:0;
-    z-index:2;
-    text-align:center;
-    pointer-events:none}
+  .hero-photo{height:75vh;width:auto;position:absolute;left:0;bottom:0;z-index:1}
+  .hero-text{position:absolute;top:12%;left:0;right:0;z-index:2;text-align:center;pointer-events:none}
   .hero-text h1{font-size:13vw;letter-spacing:0px}
   .hero-text p{font-size:4vw;letter-spacing:2px;margin-top:4px}
-  .hero-btn{
-    font-size:4.5vw;
-    padding:12px 28px;
-    right:5%;
-    bottom:12%;
-    z-index:3}
+  .hero-btn{font-size:4.5vw;padding:12px 28px;right:5%;bottom:12%;z-index:3}
 
-  /* ABOUT — single column, no overflow */
   .about-scroll{padding:70px 12px 40px}
   .about-heading{font-size:min(13vw,52px);margin-bottom:20px}
-  .about-grid{
-    grid-template-columns:1fr;
-    gap:14px;
-    width:100%;
-    max-width:100%}
+  .about-grid{grid-template-columns:1fr;gap:14px;width:100%;max-width:100%}
   .card{padding:20px;font-size:14px;border-radius:16px}
   .card p+p{margin-top:12px}
-  
-  /* Увеличены иконки для мобилки */
   .sw{width:48px;height:48px;}
-  
   .sk-list li{font-size:14px;padding:7px 0 7px 20px}
 
   /* PROJECTS */
   .proj-scroll{padding:65px 8px 30px}
+  
+  /* Главный фикс: отключили фиксированную высоту и задали отступ */
   .proj-grid-top,.proj-grid-bot{
     grid-template-columns:1fr;
-    margin-bottom:10px}
-  .pc{padding:14px;border-radius:16px;min-height:200px}
+    margin-bottom:14px;
+    height:auto; 
+  }
+  
+  .pc{padding:14px;border-radius:16px;min-height:auto;}
   .pc h3{font-size:5vw;margin-bottom:10px}
   .id-wrap{flex-direction:column;gap:8px}
   .id-main{width:100%;height:160px;object-fit:cover;flex:none}
@@ -189,14 +166,11 @@ body.light nav button.active{background:var(--lt);color:#fff}
   .id-sm-grid img{height:70px}
   .imgs img{max-height:130px}
 
-  /* CONTACTS */
   .cont-wrap{padding:70px 16px 40px;justify-content:center}
   .cont-wrap h2{font-size:6vw;margin-bottom:28px}
   .launch{font-size:6.5vw;padding:14px 24px;border-radius:36px;margin-bottom:24px}
   .tg{font-size:5vw}
   .cont-sub{font-size:3.5vw}
-
-  /* LIGHTBOX */
   #lb-hint{font-size:11px;bottom:12px;text-align:center;width:90%}
 }
 </style>
@@ -245,7 +219,6 @@ body.light nav button.active{background:var(--lt);color:#fff}
       </div>
       <div class="card">
         <div class="sw-row">
-          <!-- Картинки занимают 100% контейнера и имеют свое скругление -->
           <div class="sw"><img src="images/ps_logo.png" alt="Ps" style="width:100%;height:100%;object-fit:cover;border-radius:14px;"></div>
           <div class="sw"><img src="images/ai_logo.png" alt="Ai" style="width:100%;height:100%;object-fit:cover;border-radius:14px;"></div>
           <div class="sw"><img src="images/id_logo.png" alt="Id" style="width:100%;height:100%;object-fit:cover;border-radius:14px;"></div>
