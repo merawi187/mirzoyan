@@ -10,9 +10,10 @@
 :root{--p:#6b5082;--cream:#f5f3ed;--lt:#5a3d70}
 html,body{width:100%;height:100%;overflow:hidden;cursor:none;font-family:'Montserrat',sans-serif;background:var(--p);transition:background .4s}
 
-/* CURSOR */
-#cur{position:fixed;top:0;left:0;width:28px;height:36px;pointer-events:none;z-index:99999;transition:transform .15s}
-body.light #cur path{stroke:#333}
+/* CURSOR — SVG, follows mouse */
+#cur{position:fixed;top:0;left:0;width:30px;height:38px;pointer-events:none;z-index:99999;transition:width .15s,height .15s}
+/* Kill system cursor everywhere */
+*{cursor:none !important}
 
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;justify-content:center;gap:36px;padding:20px 0}
@@ -54,32 +55,36 @@ body.light nav button.active{background:var(--lt);color:#fff}
 .card:hover{transform:translateY(-6px);box-shadow:0 0 28px rgba(160,100,220,.4),0 18px 40px rgba(0,0,0,.18)}
 @keyframes cardPop{from{opacity:0;transform:scale(.9) translateY(12px)}to{opacity:1;transform:scale(1) translateY(0)}}
 .card p+p{margin-top:16px}
-.sw-row{display:flex;gap:10px;margin-bottom:24px;flex-wrap:wrap}
-.sw{width:48px;height:48px;background:#fff;color:var(--p);border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:17px;transition:.25s;cursor:none;flex-shrink:0}
-.sw:hover{transform:translateY(-8px);box-shadow:0 0 16px rgba(255,255,255,.6)}
+.sw-row{display:flex;gap:14px;margin-bottom:24px;flex-wrap:wrap}
+
+/* Убрали фон, увеличили размер контейнера для иконок */
+.sw{width:60px;height:60px;background:transparent;display:flex;align-items:center;justify-content:center;transition:.25s;cursor:none;flex-shrink:0}
+.sw:hover{transform:translateY(-8px) scale(1.05); filter:drop-shadow(0 10px 14px rgba(0,0,0,.15))}
+
 .sk-list{list-style:none}
 .sk-list li{padding:9px 0 9px 22px;position:relative;font-size:16px}
 .sk-list li::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:8px;height:8px;background:#fff;border-radius:50%}
 
 /* ══ PROJECTS ══ */
 #projects{background:var(--p)}
-.proj-scroll{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;padding:80px 3% 40px}
-.proj-grid-top{display:grid;grid-template-columns:1fr 1.5fr;gap:16px;max-width:1060px;margin:0 auto 16px}
-.proj-grid-bot{display:grid;grid-template-columns:2fr 1fr;gap:16px;max-width:1060px;margin:0 auto}
+/* Project grids — fixed height so cards don't stretch */
+.proj-scroll{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;padding:74px 3% 20px}
+.proj-grid-top{display:grid;grid-template-columns:1fr 1.5fr;gap:14px;max-width:1060px;margin:0 auto 14px;height:calc(50vh - 60px)}
+.proj-grid-bot{display:grid;grid-template-columns:2fr 1fr;gap:14px;max-width:1060px;margin:0 auto;height:calc(50vh - 60px)}
 .pc{background:var(--cream);border-radius:22px;padding:20px;color:var(--lt);display:flex;flex-direction:column;overflow:hidden;transition:transform .35s,box-shadow .35s;animation:cardPop .5s ease both}
 .pc:nth-child(2){animation-delay:.1s}.pc:nth-child(3){animation-delay:.2s}.pc:nth-child(4){animation-delay:.3s}
 .pc:hover{transform:translateY(-8px) scale(1.01);box-shadow:0 0 36px rgba(200,150,255,.45),0 20px 44px rgba(0,0,0,.28)}
 .pc h3{font-family:'Playfair Display',serif;font-size:clamp(16px,1.8vw,26px);text-align:center;margin-bottom:12px;flex-shrink:0}
 .imgs{display:flex;gap:8px;justify-content:center;align-items:center;flex:1;min-height:0}
-.imgs img{border-radius:10px;object-fit:contain;max-width:100%;max-height:100%;transition:transform .3s,box-shadow .3s;cursor:pointer}
+.imgs img{border-radius:10px;object-fit:contain;max-width:48%;max-height:85%;transition:transform .3s,box-shadow .3s;cursor:none}
 .imgs img:hover{transform:scale(1.07);box-shadow:0 0 18px rgba(160,100,220,.5)}
 .id-wrap{display:flex;gap:10px;flex:1;min-height:0;overflow:hidden}
-.id-main{border-radius:10px;object-fit:cover;width:42%;height:100%;transition:transform .3s,box-shadow .3s;cursor:pointer}
+.id-main{border-radius:10px;object-fit:cover;width:42%;height:100%;transition:transform .3s,box-shadow .3s;cursor:none !important}
 .id-main:hover{transform:scale(1.04);box-shadow:0 0 20px rgba(160,100,220,.5)}
 .id-sm-grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:5px;width:58%;overflow:hidden}
 .id-sm-grid div{display:flex;flex-direction:column;gap:2px;overflow:hidden}
 .id-sm-grid span{font-size:10px;text-align:center;font-weight:600;color:var(--lt);flex-shrink:0}
-.id-sm-grid img{width:100%;border-radius:7px;object-fit:cover;flex:1;min-height:0;transition:transform .3s,box-shadow .3s;cursor:pointer}
+.id-sm-grid img{width:100%;border-radius:7px;object-fit:cover;flex:1;min-height:0;transition:transform .3s,box-shadow .3s;cursor:none}
 .id-sm-grid img:hover{transform:scale(1.07);box-shadow:0 0 14px rgba(160,100,220,.5)}
 
 /* ══ CONTACTS ══ */
@@ -97,6 +102,8 @@ body.light nav button.active{background:var(--lt);color:#fff}
 #lightbox.open{display:flex;animation:fadeUp .25s ease both}
 #lightbox img{max-width:90vw;max-height:90vh;border-radius:12px;box-shadow:0 0 60px rgba(180,120,255,.5);transform-origin:center;transition:transform .15s ease;cursor:none}
 #lb-hint{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.55);font-size:14px;pointer-events:none;z-index:9999;letter-spacing:.5px;white-space:nowrap}
+/* Hide hint on touch devices */
+@media(hover:none){#lb-hint{display:none}}
 
 /* ══════════════════════════════════════════
    TABLET ≤ 900px
@@ -163,7 +170,10 @@ body.light nav button.active{background:var(--lt);color:#fff}
     max-width:100%}
   .card{padding:20px;font-size:14px;border-radius:16px}
   .card p+p{margin-top:12px}
-  .sw{width:40px;height:40px;font-size:14px}
+  
+  /* Увеличены иконки для мобилки */
+  .sw{width:48px;height:48px;}
+  
   .sk-list li{font-size:14px;padding:7px 0 7px 20px}
 
   /* PROJECTS */
@@ -235,8 +245,11 @@ body.light nav button.active{background:var(--lt);color:#fff}
       </div>
       <div class="card">
         <div class="sw-row">
-          <div class="sw">Ps</div><div class="sw">Ai</div>
-          <div class="sw">Id</div><div class="sw" style="font-size:13px">Fig</div>
+          <!-- Картинки занимают 100% контейнера и имеют свое скругление -->
+          <div class="sw"><img src="images/ps_logo.png" alt="Ps" style="width:100%;height:100%;object-fit:cover;border-radius:14px;"></div>
+          <div class="sw"><img src="images/ai_logo.png" alt="Ai" style="width:100%;height:100%;object-fit:cover;border-radius:14px;"></div>
+          <div class="sw"><img src="images/id_logo.png" alt="Id" style="width:100%;height:100%;object-fit:cover;border-radius:14px;"></div>
+          <div class="sw"><img src="images/figma_logo.png" alt="Fig" style="width:100%;height:100%;object-fit:cover;border-radius:14px;"></div>
         </div>
         <ul class="sk-list">
           <li>Насмотренность</li>
@@ -257,19 +270,19 @@ body.light nav button.active{background:var(--lt);color:#fff}
       <div class="pc">
         <h3>Инфографика</h3>
         <div class="imgs">
-          <img src="images/Frame 1 1.png" alt="inf1" class="lb-img">
-          <img src="images/Frame 2 1.png" alt="inf2" class="lb-img">
+          <img src="images/iphographic1.png" alt="inf1" class="lb-img">
+          <img src="images/iphographic2.png" alt="inf2" class="lb-img">
         </div>
       </div>
       <div class="pc">
         <h3>Фирменный&nbsp;стиль</h3>
         <div class="id-wrap">
-          <img src="images/image 16.png" class="id-main lb-img" alt="brand-main">
+          <img src="images/firm_stile_big.png" class="id-main lb-img" alt="brand-main">
           <div class="id-sm-grid">
-            <div><span>Logo</span><img src="images/image 10.png" alt="logo" class="lb-img"></div>
-            <div><span>Security field</span><img src="images/image 12.png" alt="sec" class="lb-img"></div>
-            <div><span>Twists/dies</span><img src="images/image 11.png" alt="tw" class="lb-img"></div>
-            <div><span>Corporate colors</span><img src="images/image 13.png" alt="col" class="lb-img"></div>
+            <div><span>Logo</span><img src="images/logo.png" alt="logo" class="lb-img"></div>
+            <div><span>Security field</span><img src="images/security_field.png" alt="sec" class="lb-img"></div>
+            <div><span>Twists/dies</span><img src="images/twists_dies.png" alt="tw" class="lb-img"></div>
+            <div><span>Corporate colors</span><img src="images/corporate_colors.png" alt="col" class="lb-img"></div>
           </div>
         </div>
       </div>
@@ -278,15 +291,15 @@ body.light nav button.active{background:var(--lt);color:#fff}
       <div class="pc">
         <h3>Верстка</h3>
         <div class="imgs" style="flex-direction:row;gap:10px">
-          <img src="images/image 14.png" alt="lay1" class="lb-img" style="flex:1;min-width:0;max-height:160px;object-fit:cover;border-radius:10px">
-          <img src="images/image 15.png" alt="lay2" class="lb-img" style="flex:1;min-width:0;max-height:160px;object-fit:cover;border-radius:10px">
-          <img src="images/image 17.png" alt="lay3" class="lb-img" style="flex:1;min-width:0;max-height:160px;object-fit:cover;border-radius:10px">
+          <img src="images/verstka1.png" alt="lay1" class="lb-img" style="flex:1;min-width:0;max-height:160px;object-fit:cover;border-radius:10px;cursor:none">
+          <img src="images/verstka2.png" alt="lay2" class="lb-img" style="flex:1;min-width:0;max-height:160px;object-fit:cover;border-radius:10px;cursor:none">
+          <img src="images/verstka3.png" alt="lay3" class="lb-img" style="flex:1;min-width:0;max-height:160px;object-fit:cover;border-radius:10px;cursor:none">
         </div>
       </div>
       <div class="pc">
         <h3>Разработка<br>упаковки</h3>
         <div class="imgs">
-          <img src="images/image 18.png" alt="pack" class="lb-img">
+          <img src="images/pack.jpg" alt="pack" class="lb-img" style="max-width: 85%; max-height: 90%;">
         </div>
       </div>
     </div>
@@ -316,9 +329,9 @@ document.addEventListener('mousemove', e => {
   cur.style.left = e.clientX + 'px';
   cur.style.top  = e.clientY + 'px';
 });
-document.querySelectorAll('a,button').forEach(el => {
-  el.addEventListener('mouseenter', () => cur.style.transform = 'scale(1.6)');
-  el.addEventListener('mouseleave', () => cur.style.transform = 'scale(1)');
+document.querySelectorAll('a,button,.lb-img').forEach(el => {
+  el.addEventListener('mouseenter', () => { cur.style.width='52px'; cur.style.height='52px'; });
+  el.addEventListener('mouseleave', () => { cur.style.width='40px'; cur.style.height='40px'; });
 });
 
 // Tabs
